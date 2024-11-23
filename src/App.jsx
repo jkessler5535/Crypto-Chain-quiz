@@ -2,6 +2,38 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
+  //Quiz questions
+  const questions = [
+    {
+    question: "What is cryptocurrency",
+    options: ["Digital currency", "Food", "Car", "Auto Loan"],
+    correctAnswer: "Digital currency",
+    },
+    {
+      question: "What is Bitcoin?",
+      options: ["A blockchain", "A game", "A bank", "A type of chain"],
+      correctAnswer: "A blockchain",
+    },
+  ];
+
+  //States for current question index, score, and quiz completion.
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [isQuizCompleted, setIsQuizCompleted] = useState(false);
+
+  //Function to handle when answer is selected
+  const handleAnswer = (selectedOption)=>{
+    if (selectedOption === questions[currentQuestionIndex].correctAnswer) {
+      setScore(score + 1);
+    }
+
+   if(currentQuestionIndex + 1 < questions.length){
+     setCurrentQuestionIndex(currentQuestionIndex + 1);
+   }else{
+    setIsQuizFinished(true);
+   }
+  };
+
   return(
       <div>
         <h1>Blockchain & Crypto Quest</h1>
@@ -15,7 +47,7 @@ function App() {
 
         <div className = "quiz-container">
           <div className="score">
-            <h2>Score:<span id="score">0</span></h2>
+            <h2>Score:{score}</h2>
           </div>
 
           <div className="questions">
