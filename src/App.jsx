@@ -50,7 +50,7 @@ function App() {
             <h2>Score:{score}</h2>
           </div>
 
-          {setIsQuizFinished ? (
+          {setIsQuizCompleted ? (
           <div className="questions">
             <h3>Quiz Completed!</h3>
             <p>Your final score is: {score}</p>
