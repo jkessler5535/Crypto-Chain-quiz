@@ -50,19 +50,26 @@ function App() {
             <h2>Score:{score}</h2>
           </div>
 
+          {setIsQuizFinished ? (
           <div className="questions">
-            <h3>Question 1:</h3>
+            <h3>Quiz Completed!</h3>
+            <p>Your final score is: {score}</p>
+          </div>
+          ) : ( 
+          <div className="questions">
+            <h3>{questions[currentQuestionIndex].question}</h3>
             <ul className="options">
-              <li>Currency</li>
-              <li>Food</li>
-              <li>Vehicle</li>
-              <li>sport</li>
+            {questions[currentQuestionIndex].options.map((option) => (
+              <li key={option} onClick={() => handleAnswer(option)}>
+              {option}
+            </li>
+            ))}
             </ul>
           </div>
-
+          )}
+          </div>
         </div>
-    </div>
-  )
+  );
 }
     
 
