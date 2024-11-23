@@ -30,7 +30,7 @@ function App() {
    if(currentQuestionIndex + 1 < questions.length){
      setCurrentQuestionIndex(currentQuestionIndex + 1);
    }else{
-    setIsQuizFinished(true);
+    setIsQuizCompleted(true);
    }
   };
 
