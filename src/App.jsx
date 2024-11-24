@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   // Quiz questions
-  const questions = [
+  const bitcoinQuestions = [
     {
       question: "What is Crypto currency?",
       options: ["Digital currency", "Food", "Car", "Auto Loan"],
@@ -15,6 +15,19 @@ function App() {
       correctAnswer: "A blockchain",
     },
   ];
+
+  const blockchainQuestions = [
+    {
+    question: "What is a blockchain?",
+    options: ["A distributed ledger", "A game", "A type of database", "A cryptocurrency"],
+    correctAnswer: " A distributed ledger",
+    },
+   {
+    question: "What is the purpose of a smart contract?",
+    options: ["Self-executing agreement", "Digital asset", "Mining tool", "Blockchain app"],
+    correctAnswer: "Self-executing agreement",
+  },
+];
 
   // State to track the current question index and score
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -41,7 +54,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="main-container">
       <h1>Blockchain & Crypto Quest</h1>
       <h2>How to Play:</h2>
       <ul>
