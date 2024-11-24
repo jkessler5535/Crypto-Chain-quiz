@@ -16,23 +16,6 @@ function App() {
     },
   ];
 
-  //States for current question index, score, and quiz completion.
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [isQuizCompleted, setIsQuizCompleted] = useState(false);
-
-  //Function to handle when answer is selected
-  const handleAnswer = (selectedOption)=>{
-    if (selectedOption === questions[currentQuestionIndex].correctAnswer) {
-      setScore(score + 1);
-    }
-
-   if(currentQuestionIndex + 1 < questions.length){
-     setCurrentQuestionIndex(currentQuestionIndex + 1);
-   }else{
-    setIsQuizCompleted(true);
-   }
-  };
 
   return(
       <div>
@@ -45,32 +28,22 @@ function App() {
           <p>Have Fun and good luck!</p>
         </ul>
 
-        <div className = "quiz-container">
-          <div className="score">
-            <h2>Score:{score}</h2>
-          </div>
-
-          {setIsQuizCompleted ? (
-          <div className="questions">
-            <h3>Quiz Completed!</h3>
-            <p>Your final score is: {score}</p>
-          </div>
-          ) : ( 
-          <div className="questions">
-            <h3>{questions[currentQuestionIndex].question}</h3>
+        <div className="quiz-container">
+        {questions.map((question, index) => (
+          <div key={index} className="question">
+            <h3>{question.question}</h3>
             <ul className="options">
-            {questions[currentQuestionIndex].options.map((option) => (
-              <li key={option} onClick={() => handleAnswer(option)}>
-              {option}
-            </li>
-            ))}
+              {question.options.map((option, optionIndex) => (
+                <li key={optionIndex}>{option}</li>
+              ))}
             </ul>
           </div>
-          )}
-          </div>
-        </div>
+        ))}
+      </div>
+    </div>
   );
 }
-    
 
-export default App
+export default App;
+
+        
