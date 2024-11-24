@@ -1,13 +1,13 @@
-import { useState } from 'react'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-  //Quiz questions
+  // Quiz questions
   const questions = [
     {
-    question: "What is cryptocurrency",
-    options: ["Digital currency", "Food", "Car", "Auto Loan"],
-    correctAnswer: "Digital currency",
+      question: "What is Crypto currency?",
+      options: ["Digital currency", "Food", "Car", "Auto Loan"],
+      correctAnswer: "Digital currency",
     },
     {
       question: "What is Bitcoin?",
@@ -16,34 +16,74 @@ function App() {
     },
   ];
 
+  // State to track the current question index and score
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [selectedOption, setSelectedOption]= useState("");
+  
 
-  return(
-      <div>
-        <h1>Blockchain & Crypto Quest</h1>
-        <h2>How to Play:</h2>
-        <ul>
-          <li>Answer a question about blockchain or crypto</li>
-          <li>Get a reward in the form of a cryptocurrency token</li>
-          <li>Use your tokens to buy items in the store</li>
-          <p>Have Fun and good luck!</p>
-        </ul>
+  // Handle the selection of an answer
+  const handleAnswer = () => {
+    if (selectedOption === questions[currentQuestionIndex].correctAnswer) {
+      setScore(score + 1);
+      alert("That is Correct!");
+    }else{
+      alert("That is Incorrect!");
+    }
 
-        <div className="quiz-container">
-        {questions.map((question, index) => (
-          <div key={index} className="question">
-            <h3>{question.question}</h3>
-            <ul className="options">
-              {question.options.map((option, optionIndex) => (
-                <li key={optionIndex}>{option}</li>
-              ))}
-            </ul>
+    // Move to the next question 
+    if (currentQuestionIndex + 1 < questions.length) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedOption("");
+    } else {
+      alert(`Quiz completed! Your final score is: ${score + 1}`);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Blockchain & Crypto Quest</h1>
+      <h2>How to Play:</h2>
+      <ul>
+        <li>Answer a question about blockchain or crypto</li>
+        <li>Get a reward in the form of a cryptocurrency token</li>
+        <li>Use your tokens to buy items in the store</li>
+        <p>Have fun and good luck!</p>
+      </ul>
+
+      <div className="quiz-container">
+        <div className="question">
+          <h3>{questions[currentQuestionIndex].question}</h3>
+          <ul className="options">
+            {questions[currentQuestionIndex].options.map((option, optionIndex) => (
+              <li key={optionIndex}>
+                <label>
+                  <input
+                  type="radio"
+                  name={`question-${currentQuestionIndex}`}
+                  value={option}
+                  checked={selectedOption === option}
+                  onChange={() => setSelectedOption(option)}
+                  />
+                {option}
+                </label>
+              </li>
+            ))}
+          </ul>
+
+          <div className="submit-btn">
+            <button onClick={handleAnswer} disabled={!selectedOption}>
+            Submit Answer
+            </button>
           </div>
-        ))}
+        </div>
+
+        <div className="score">
+          <h2>Score: {score}</h2>
+        </div>
       </div>
     </div>
   );
 }
 
 export default App;
-
-        
