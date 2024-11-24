@@ -36,7 +36,7 @@ function App() {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedOption("");
     } else {
-      alert(`Quiz completed! Your final score is: ${score + 1}`);
+      alert(`Quiz completed! Your final score is: ${score}`);
     }
   };
 
